@@ -20,4 +20,6 @@
     <string name="drawer_close">Drawer close.</string>
 
     <string name="facebook_app_id">190240024656344</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_google_sign">GoogleSignActivity</string>
 </resources>
