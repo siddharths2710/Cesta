@@ -265,7 +265,7 @@ public class GoogleSignActivity extends AppCompatActivity implements
                     //((MainActivity) this).openMap(new MapFragment());
                 }*/
                 Intent i = new Intent();
-                final Account a = new Account();
+                final Account a = new Account(Account.Type.Google);
                 a.setName(currentPerson.getDisplayName());
                 a.setEmail(Plus.AccountApi.getAccountName(mGoogleApiClient));
 

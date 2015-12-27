@@ -18,8 +18,17 @@
 
     <string name="drawer_open">Drawer open.</string>
     <string name="drawer_close">Drawer close.</string>
-
+    <color name="white">#FFFFFF</color>
+    <color name="orange">#FF6F00</color>
     <string name="facebook_app_id">190240024656344</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_google_sign">GoogleSignActivity</string>
+
+    <string-array name="seats">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>Custom</item>
+    </string-array>
 </resources>

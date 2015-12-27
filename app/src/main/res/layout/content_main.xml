@@ -19,46 +19,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />-->
 
-    <com.google.android.gms.common.SignInButton
+    <!--<com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_alignStart="@+id/login_button" />
 
     <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/sign_in"
+        android:layout_centerHorizontal="true" />-->
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_alignStart="@+id/login_button"
+        android:layout_centerVertical="true"
+        android:text="Google" />
+
+    <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_in"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="128dp" />
+        android:layout_marginTop="42dp"
+        android:text="Facebook" />
 
     <Button
         android:id="@+id/sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/status"
+        android:layout_above="@+id/log_out"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:text="Sign out" />
+        android:layout_marginBottom="40dp"
+        android:text="Sign out." />
 
     <Button
-        android:id="@+id/disconnect_button"
+        android:id="@+id/log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sign_out"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Disconnect" />
-
-    <Button
-        android:id="@+id/map_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/status"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
-        android:text="Open Map" />
+        android:text="Log out." />
 
 </RelativeLayout>
