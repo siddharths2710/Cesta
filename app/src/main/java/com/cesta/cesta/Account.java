@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +26,8 @@ public class Account implements Serializable {
     private int age;
     private String gender = "M";
     private List<Pref> p;
+    private ImageView imageView;
+
 
     public Account(Type type) {
         this.type = type;
@@ -90,6 +93,9 @@ public class Account implements Serializable {
         this.p = p;
     }
 
+    public void setImageView(ImageView i) {
+        imageView = i;
+    }
     public void downloadImage(final Context c, String path) {
         new AsyncTask<String, Void, Bitmap>() {
 
@@ -110,7 +116,7 @@ public class Account implements Serializable {
 
             @Override
             protected void onPostExecute(Bitmap bitmap) {
-                ContextWrapper cw = new ContextWrapper(c);
+                /*ContextWrapper cw = new ContextWrapper(c);
                 // path to /data/data/yourapp/app_data/imageDir
                 File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
                 // Create imageDir
@@ -129,9 +135,10 @@ public class Account implements Serializable {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                }
-                String pathS = directory.getAbsolutePath();
-                Account.this.setImagePath(pathS);
+                }*/
+                imageView.setImageBitmap(bitmap);
+                /*String pathS = directory.getAbsolutePath();
+                Account.this.setImagePath(pathS);*/
             }
         }.execute(path);
     }
@@ -139,4 +146,6 @@ public class Account implements Serializable {
     enum Type {
         FaceBook, Google;
     }
+
+
 }

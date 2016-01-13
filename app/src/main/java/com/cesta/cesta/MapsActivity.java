@@ -2,14 +2,18 @@ package com.cesta.cesta;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.location.Location;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,8 +26,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +42,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.Serializable;
+
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity";
@@ -42,6 +53,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
     //private GoogleApiClient mGoogleApiClient;
+    private Account account;
+
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -72,6 +85,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
+
+        account = (Account) getIntent().getSerializableExtra("ac");
+        TextView name = (TextView) findViewById(R.id.nav_name);
+        TextView email = (TextView) findViewById(R.id.nav_email);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        account.setImageView(imageView);
+        name.setText(account.getName());
+        email.setText(account.getEmail());
+        account.downloadImage(getApplicationContext(), account.getImagePath());
+
+
 
         Toolbar actionBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionBar);
@@ -112,6 +136,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         FragmentTransaction transaction;
+
+
                         switch (menuItem.getItemId()) {
                             case R.id.map_item:
                                 transaction = getSupportFragmentManager()
@@ -120,30 +146,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 // Replace whatever is in the fragment_container view with this fragment,
                                 // and add the transaction to the back stack if needed
                                 transaction.replace(R.id.map, mapFragment);
-                                transaction.addToBackStack(null);
+                                //transaction.addToBackStack(null);
 
                                 // Commit the transaction
                                 transaction.commit();
 
                                 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-                                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                                        .findFragmentById(R.id.map);
+                                // SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                                //         .findFragmentById(R.id.map);
                                 mapFragment.getMapAsync(MapsActivity.this);
 
                                 mMap = mapFragment.getMap();
                                 break;
                             case R.id.profile_item:
                                 // TODO: add profile.
-                                /*transaction = getSupportFragmentManager()
-										.beginTransaction();
+                                transaction = getSupportFragmentManager()
+                                        .beginTransaction();
 
 								// Replace whatever is in the fragment_container view with this fragment,
 								// and add the transaction to the back stack if needed
-								transaction.replace(R.id.map, new ProfileFrag());
-								transaction.addToBackStack(null);
+                                transaction.replace(R.id.map, new ProfileFragment());
+                                //transaction.addToBackStack(null);
+                                transaction.commit();
+                                // Commit the transaction
 
-								// Commit the transaction
-								transaction.commit();*/
                                 break;
                         }
                         drawerLayout.closeDrawers();
@@ -171,6 +197,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    public Account getAccount() {
+        return account;
+    }
     private void showDialogBox() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         View dialog = View.inflate(this, R.layout.dialog_layout, null);
@@ -237,6 +266,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

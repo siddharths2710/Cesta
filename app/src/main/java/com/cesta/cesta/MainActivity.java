@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 		transaction.commit();*/
 
 		SharedPreferences p = getSharedPreferences(PREF, Context.MODE_PRIVATE);
+
 		if (p.contains(SIGNED_IN) && p.getBoolean(SIGNED_IN, false)) {
 			Intent intent = new Intent(this, MapsActivity.class);
 			Serializable s = null;
@@ -104,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 				s = (Serializable) is.readObject();
 				is.close();
 				fis.close();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				Log.d(TAG, "Hello");
 			}
 			intent.putExtra("ac", s);
 			startActivity(intent);
