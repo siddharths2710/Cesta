@@ -3,3 +3,9 @@ An idea that brewed among me & my friends to make a carpooling app which has rou
 
 # Working
 ![alt tag](cesta.gif)
+
+# Contributors
+
+* [Rajath Nandan](https://github.com/rjtnndn)
+* [Shreyash Sarnayak](https://github.com/shreyash14s)
+* [Siddharth Srinivasan] (https://github.com/siddharths2710)
