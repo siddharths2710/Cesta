@@ -8,4 +8,4 @@ An idea that brewed among me & my friends to make a carpooling app which has rou
 
 * [Rajath Nandan](https://github.com/rjtnndn)
 * [Shreyash Sarnayak](https://github.com/shreyash14s)
-* [Siddharth Srinivasan] (https://github.com/siddharths2710)
+* [Siddharth Srinivasan](https://github.com/siddharths2710)
